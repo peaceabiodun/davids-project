@@ -22,7 +22,7 @@ const Header = ({ breadcrumbs }: HeaderProps) => {
   //     setKey((p) => p + 1);
   //   }, [breadcrumbs]);
   return (
-    <div className='w-full flex justify-between h-[70px] px-3 my-3 '>
+    <div className='w-full flex justify-between h-[70px] px-3  '>
       <div className='flex items-center ml-3 text-sm'>Good Morning David</div>
       {/* <div className='breadcrumbs' key={key}>
           {crumbs.map(({ name, path }) => (

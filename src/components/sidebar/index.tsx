@@ -59,7 +59,9 @@ const Sidebar = () => {
         <img src={Avatar} alt='avatar' />
         <div className='text-sm'>
           <p>David Muritala</p>
-          <p className='text-[#999999] mt-1'>david.muri@schoolportal.com</p>
+          <p className='text-[#999999] mt-1 font-light'>
+            david.muri@schoolportal.com
+          </p>
         </div>
       </div>
 

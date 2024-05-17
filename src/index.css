@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 @font-face {
   font-family: 'Aeonik Bold';
   src: url('assets/fonts/Aeonik-Bold.otf');
@@ -41,4 +53,12 @@ body {
 
 .font-normal {
   font-family: 'Aeonik Regular', sans-serif;
+}
+
+.font-light {
+  font-family: 'Aeonik Light', sans-serif;
+}
+
+.font-thin {
+  font-family: 'Aeonik Thin', sans-serif;
 }

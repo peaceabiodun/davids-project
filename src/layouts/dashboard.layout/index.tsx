@@ -14,7 +14,7 @@ const DashboardLayout = () => {
     },
   ];
   return (
-    <div className='flex '>
+    <div className='flex relative w-full '>
       <Sidebar />
       <div className='flex flex-col grow'>
         <Header breadcrumbs={breadCrumbs} />
