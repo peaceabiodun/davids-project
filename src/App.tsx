@@ -10,6 +10,8 @@ import Welcome from './pages/welcome';
 import DashboardLayout from './layouts/dashboard.layout';
 import Home from './pages/home';
 import Students from './pages/students';
+import Courses from './pages/courses';
+import StudentDetails from './pages/students/student-details';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,7 +20,9 @@ const router = createBrowserRouter(
       <Route path='/welcome' element={<Welcome />} />
       <Route path='/dashboard' element={<DashboardLayout />}>
         <Route index element={<Home />} />
-        <Route path='students' element={<Students />} />
+        <Route path='students' element={<StudentDetails />} />
+        {/* <Route path='students' element={<Students />} /> */}
+        <Route path='courses' element={<Courses />} />
       </Route>
     </Route>
   )

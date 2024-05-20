@@ -22,7 +22,7 @@ const Sidebar = () => {
     {
       name: 'Courses',
       icon: <CourseIcon />,
-      route: '',
+      route: 'courses',
     },
     {
       name: 'Hostels',

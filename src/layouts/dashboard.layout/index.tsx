@@ -3,21 +3,11 @@ import Header from '../../components/header';
 import Sidebar from '../../components/sidebar';
 
 const DashboardLayout = () => {
-  const breadCrumbs = [
-    {
-      name: 'Overview',
-      path: '',
-    },
-    {
-      name: 'Create cokitchen',
-      path: '',
-    },
-  ];
   return (
     <div className='flex relative w-full '>
       <Sidebar />
       <div className='flex flex-col grow'>
-        <Header breadcrumbs={breadCrumbs} />
+        <Header />
         <div className='w-full'>
           <Outlet />
         </div>
