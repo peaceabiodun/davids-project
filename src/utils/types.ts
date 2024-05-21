@@ -20,3 +20,13 @@ export type YearTableDataType = {
   courseTitle: string;
   status: string;
 };
+
+export type CourseTableDataType = {
+  key: string;
+  sn: string;
+  courseCode: string;
+  courseTitle: string;
+  department: string;
+  level: string;
+  attendance: string;
+};

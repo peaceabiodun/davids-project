@@ -1,7 +1,7 @@
 import { ReactComponent as SearchIcon } from '../../assets/icons/search-icon.svg';
 import { ReactComponent as FilterIcon } from '../../assets/icons/filter-icon.svg';
 import { ReactComponent as ExportIcon } from '../../assets/icons/export-icon.svg';
-import { Table } from 'antd';
+import { Table, ConfigProvider } from 'antd';
 import type { TableProps } from 'antd';
 import { TreeSelect } from 'antd';
 import { StudentTableDataType } from '../../utils/types';
@@ -149,54 +149,61 @@ const Students = () => {
     style: {
       width: '100px',
       height: '48px',
-      font: 'Aeonik Light',
-      color: '#808084',
     },
   };
   return (
-    <div className='bg-[#FAFAFA] p-4 w-full h-full min-h-screen '>
-      <div className='m-4 bg-white rounded-md h-full p-3'>
-        <div className='flex justify-between pb-3'>
-          <div className='bg-[#FAFAFA] flex gap-2 p-3 rounded-md w-[280px]'>
-            <SearchIcon />
-            <input
-              type='text'
-              placeholder='Search Students'
-              className='bg-[#FAFAFA] outline-none text-sm font-light w-full'
-            />
-          </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          fontSize: 14,
+          colorText: '#808084',
+        },
+      }}
+    >
+      <div className='bg-[#FAFAFA] p-4 w-full h-full min-h-screen '>
+        <div className='m-4 bg-white rounded-md h-full p-3'>
+          <div className='flex justify-between pb-3'>
+            <div className='bg-[#FAFAFA] flex gap-2 p-3 rounded-md w-[280px]'>
+              <SearchIcon />
+              <input
+                type='text'
+                placeholder='Search Students'
+                className='bg-[#FAFAFA] outline-none text-sm font-light w-full'
+              />
+            </div>
 
-          <div className='flex gap-2'>
-            {/* <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[100px] '>
+            <div className='flex gap-2'>
+              {/* <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[100px] '>
               <p>Filter</p>
               <FilterIcon />
             </div> */}
-            <div>
-              <TreeSelect
-                {...tProps}
-                className='text-sm w-[100px] text-[#808084] font-light'
-                dropdownStyle={{ width: '200px' }}
-              />
-            </div>
-            <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[130px]'>
-              <p>Export Data</p>
-              <ExportIcon />
+              <div>
+                <TreeSelect
+                  {...tProps}
+                  className='text-sm w-[100px] text-[#808084] font-light'
+                  dropdownStyle={{ width: '200px' }}
+                />
+              </div>
+              <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[130px]'>
+                <p>Export Data</p>
+                <ExportIcon />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className='border-y p-3 w-full flex justify-between'>
-          <div className='bg-[#FAFAFA] p-2 rounded-xl text-xs cursor-pointer'>
-            All Students
+          <div className='border-y p-3 w-full flex justify-between'>
+            <div className='bg-[#FAFAFA] p-2 rounded-xl text-xs cursor-pointer'>
+              All Students
+            </div>
+            <div>1 - 10</div>
           </div>
-          <div>1 - 10</div>
-        </div>
 
-        <div className='w-full'>
-          <Table columns={columns} dataSource={sampleTableData} />
+          <div className='w-full'>
+            <Table columns={columns} dataSource={sampleTableData} />
+          </div>
         </div>
       </div>
-    </div>
+    </ConfigProvider>
   );
 };
 
