@@ -27,17 +27,17 @@ const Sidebar = () => {
     {
       name: 'Hostels',
       icon: <HostelIcon />,
-      route: '',
+      route: 'hostels',
     },
     {
       name: 'Guardians',
       icon: <UserIcon />,
-      route: '',
+      route: 'guardians',
     },
     {
       name: 'Lecturers',
       icon: <StudentIcon />,
-      route: '',
+      route: 'lecturers',
     },
   ];
 

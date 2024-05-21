@@ -12,6 +12,9 @@ import Home from './pages/home';
 import Students from './pages/students';
 import Courses from './pages/courses';
 import StudentDetails from './pages/students/student-details';
+import Hostels from './pages/hostels';
+import Guardians from './pages/guardians';
+import Lecturers from './pages/lecturers';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +26,9 @@ const router = createBrowserRouter(
         <Route path='students' element={<StudentDetails />} />
         {/* <Route path='students' element={<Students />} /> */}
         <Route path='courses' element={<Courses />} />
+        <Route path='hostels' element={<Hostels />} />
+        <Route path='guardians' element={<Guardians />} />
+        <Route path='lecturers' element={<Lecturers />} />
       </Route>
     </Route>
   )
