@@ -79,7 +79,7 @@ const StudentProfile = () => {
           </div>
 
           <div>
-            <div className='my-2'>
+            <div className='mb-2'>
               <p className='text-[#737A91] font-light'>Courses Failed</p>
               <p>None</p>
             </div>

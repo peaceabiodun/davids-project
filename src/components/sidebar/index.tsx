@@ -5,7 +5,7 @@ import { ReactComponent as CourseIcon } from '../../assets/icons/course-icon.svg
 import { ReactComponent as HostelIcon } from '../../assets/icons/hostel-icon.svg';
 import { ReactComponent as UserIcon } from '../../assets/icons/user-icon.svg';
 import Avatar from '../../assets/images/avatar.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
   const sidebarMenu = [
@@ -41,6 +41,12 @@ const Sidebar = () => {
     },
   ];
 
+  const { pathname } = useLocation();
+  const isLinkActive = (baseRoute?: string) => {
+    if (baseRoute) {
+      return pathname.includes(baseRoute);
+    }
+  };
   return (
     <div className='w-[280px] my-3'>
       <div className='flex justify-between border-b px-3 pb-3 h-[70px]'>
@@ -70,7 +76,11 @@ const Sidebar = () => {
           <Link
             key={index}
             to={item.route}
-            className='flex gap-3 p-3 text-sm text-[#808084] hover:font-semibold hover:text-black hover:bg-[#F6F6F6] rounded-lg cursor-pointer'
+            className={`flex gap-3 p-3 text-sm  hover:font-semibold hover:text-black hover:bg-[#F6F6F6] rounded-lg cursor-pointer ${
+              isLinkActive(item.route)
+                ? 'font-semibold text-black bg-[#F6F6F6]'
+                : 'text-[#808084]'
+            } `}
           >
             <div>{item.icon}</div>
             <p>{item.name}</p>

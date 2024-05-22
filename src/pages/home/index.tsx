@@ -101,7 +101,7 @@ const Home = () => {
   ];
   return (
     <div className='bg-[#FAFAFA] p-4 w-full h-full '>
-      <div className='flex grow gap-4 overflow-x-scroll no-scrollbar scroll-smooth'>
+      <div className='flex grow gap-4 '>
         {dashboardStats.map((item, index) => (
           <div key={index} className='bg-white p-3 rounded-lg w-[200px]'>
             <div className='bg-[#F0F0F0] w-10 h-10 rounded-full flex items-center justify-center p-1'>

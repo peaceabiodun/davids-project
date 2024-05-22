@@ -6,6 +6,7 @@ import type { TableProps } from 'antd';
 import { TreeSelect } from 'antd';
 import { StudentTableDataType } from '../../utils/types';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const columns: TableProps<StudentTableDataType>['columns'] = [
   {
@@ -135,6 +136,8 @@ const treeData = [
 
 const Students = () => {
   const [value, setValue] = useState(['0-0-0']);
+  const [selectedRow, setSelectedRow] = useState({});
+  const navigate = useNavigate();
   const onChange = (newValue: string[]) => {
     setValue(newValue);
   };
@@ -199,7 +202,18 @@ const Students = () => {
           </div>
 
           <div className='w-full'>
-            <Table columns={columns} dataSource={sampleTableData} />
+            <Table
+              columns={columns}
+              dataSource={sampleTableData}
+              onRow={(record) => {
+                return {
+                  onClick: () => {
+                    setSelectedRow(record);
+                    navigate('/dashboard/students-details', { replace: true });
+                  },
+                };
+              }}
+            />
           </div>
         </div>
       </div>
