@@ -3,7 +3,67 @@ import { ReactComponent as CourseIcon } from '../../assets/icons/course-icon.svg
 import { ReactComponent as HostelIcon } from '../../assets/icons/hostel-icon.svg';
 import { ReactComponent as UserIcon } from '../../assets/icons/user-icon.svg';
 import { ReactComponent as HomeIcon } from '../../assets/icons/home-icon.svg';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { faker } from '@faker-js/faker';
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+  },
+};
+
+const labels = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
+export const data = {
+  labels,
+  datasets: [
+    {
+      fill: true,
+      label: 'Dataset 2',
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      borderColor: '#000010',
+      backgroundColor: '#F0F0F0',
+    },
+  ],
+};
 const Home = () => {
   const dashboardStats = [
     {
@@ -40,7 +100,7 @@ const Home = () => {
     { icon: <CourseIcon />, name: 'Lecturers' },
   ];
   return (
-    <div className='bg-[#FAFAFA] p-4 w-full'>
+    <div className='bg-[#FAFAFA] p-4 w-full h-full '>
       <div className='flex grow gap-4 overflow-x-scroll no-scrollbar scroll-smooth'>
         {dashboardStats.map((item, index) => (
           <div key={index} className='bg-white p-3 rounded-lg w-[200px]'>
@@ -55,7 +115,7 @@ const Home = () => {
         ))}
       </div>
 
-      <div className='flex my-4 h-[60vh]'>
+      <div className='flex my-4'>
         <div className='bg-white p-2 space-y-3 w-[200px] border-r'>
           {statArray.map((item, index) => (
             <div
@@ -79,6 +139,12 @@ const Home = () => {
             <p className='hover:bg-black py-2 px-3 rounded-md hover:text-white cursor-pointer'>
               Weekly
             </p>
+          </div>
+
+          <div className='my-3'>
+            <p className='text-2xl'>2,453</p>
+            <p className='mt-1 text-[#999999] text-sm'>2024</p>
+            <Line options={options} data={data} />
           </div>
         </div>
       </div>
