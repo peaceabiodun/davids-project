@@ -1,12 +1,11 @@
 import { ReactComponent as SearchIcon } from '../../assets/icons/search-icon.svg';
-import { ReactComponent as FilterIcon } from '../../assets/icons/filter-icon.svg';
 import { ReactComponent as ExportIcon } from '../../assets/icons/export-icon.svg';
 import { Table, ConfigProvider } from 'antd';
 import type { TableProps } from 'antd';
-import { TreeSelect } from 'antd';
 import { StudentTableDataType } from '../../utils/types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Filter from '../../components/filter';
 
 const columns: TableProps<StudentTableDataType>['columns'] = [
   {
@@ -86,74 +85,27 @@ const sampleTableData: StudentTableDataType[] = [
   },
 ];
 
-const { SHOW_PARENT } = TreeSelect;
-const treeData = [
+const options = [
   {
-    title: 'Gender',
-    value: '0-0',
-    key: '0-0',
-    children: [
-      {
-        title: 'All',
-        value: '0-0-0',
-        key: '0-0-0',
-      },
-      {
-        title: 'Male',
-        value: '0-1-0',
-        key: '0-1-0',
-      },
-      {
-        title: 'Female',
-        value: '0-1-1',
-        key: '0-1-1',
-      },
-    ],
+    filter: 'Gender',
+    options: ['All', 'Male', 'Female'],
   },
   {
-    title: 'Department',
-    value: '0-1',
-    key: '0-1',
-    children: [
-      {
-        title: 'Computer Science',
-        value: '1-1-1',
-        key: '1-1-1',
-      },
-      {
-        title: 'Mathematics',
-        value: '1-2-1',
-        key: '1-2-1',
-      },
-      {
-        title: 'Biology',
-        value: '1-1-2',
-        key: '1-1-2',
-      },
-    ],
+    filter: 'Department',
+    options: ['Computer Science', 'Biology', 'ICT', 'Maths'],
   },
 ];
-
 const Students = () => {
-  const [value, setValue] = useState(['0-0-0']);
   const [selectedRow, setSelectedRow] = useState({});
-  const navigate = useNavigate();
-  const onChange = (newValue: string[]) => {
-    setValue(newValue);
-  };
+  const [selectedOptions, setSelectedOptions] = useState<{
+    [key: string]: string[];
+  }>({});
 
-  const tProps = {
-    treeData,
-    value,
-    onChange,
-    treeCheckable: true,
-    showCheckedStrategy: SHOW_PARENT,
-    placeholder: 'Filter',
-    style: {
-      width: '100px',
-      height: '48px',
-    },
+  const handleSelect = (options: { [key: string]: string[] }) => {
+    setSelectedOptions(options);
   };
+  const navigate = useNavigate();
+
   return (
     <ConfigProvider
       theme={{
@@ -176,17 +128,8 @@ const Students = () => {
             </div>
 
             <div className='flex gap-2'>
-              {/* <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[100px] '>
-              <p>Filter</p>
-              <FilterIcon />
-            </div> */}
-              <div>
-                <TreeSelect
-                  {...tProps}
-                  className='text-sm w-[100px] text-[#808084] font-light'
-                  dropdownStyle={{ width: '200px' }}
-                />
-              </div>
+              <Filter options={options} onSelect={handleSelect} />
+
               <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[130px]'>
                 <p>Export Data</p>
                 <ExportIcon />
@@ -195,8 +138,17 @@ const Students = () => {
           </div>
 
           <div className='border-y p-3 w-full flex justify-between'>
-            <div className='bg-[#FAFAFA] p-2 rounded-xl text-xs cursor-pointer'>
-              All Students
+            <div className='flex gap-2'>
+              {Object.keys(selectedOptions).flatMap((filter) =>
+                selectedOptions[filter].map((option) => (
+                  <div
+                    key={`${filter}-${option}`}
+                    className='bg-[#FAFAFA] p-2 rounded-xl text-xs cursor-pointer'
+                  >
+                    {option}
+                  </div>
+                ))
+              )}
             </div>
             <div>1 - 10</div>
           </div>

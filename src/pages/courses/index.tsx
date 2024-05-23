@@ -1,8 +1,9 @@
 import { ReactComponent as SearchIcon } from '../../assets/icons/search-icon.svg';
 import { ReactComponent as ExportIcon } from '../../assets/icons/export-icon.svg';
-import { Table, TableProps, TreeSelect } from 'antd';
+import { Table, TableProps } from 'antd';
 import { CourseTableDataType } from '../../utils/types';
 import { useState } from 'react';
+import Filter from '../../components/filter';
 
 const columns: TableProps<CourseTableDataType>['columns'] = [
   {
@@ -67,72 +68,25 @@ const sampleTableData: CourseTableDataType[] = [
   },
 ];
 
-const treeData = [
+const options = [
   {
-    title: 'Department',
-    value: '1',
-    key: '1',
-    children: [
-      {
-        title: 'Computer Science',
-        value: '01',
-        key: '01',
-      },
-      {
-        title: 'Mathematics',
-        value: '02',
-        key: '02',
-      },
-      {
-        title: 'Biology',
-        value: '03',
-        key: '03',
-      },
-    ],
+    filter: 'Department',
+    options: ['Computer Science', 'Biology', 'ICT', 'Maths'],
   },
   {
-    title: 'Level',
-    value: '2',
-    key: '2',
-    children: [
-      {
-        title: '100L',
-        value: '04',
-        key: '04',
-      },
-      {
-        title: '200L',
-        value: '05',
-        key: '05',
-      },
-      {
-        title: '300L',
-        value: '06',
-        key: '06',
-      },
-    ],
+    filter: 'Level',
+    options: ['100 L', '200 L', '300 L', '400 L'],
   },
 ];
-
-const { SHOW_PARENT } = TreeSelect;
 const Courses = () => {
-  const [value, setValue] = useState(['01']);
-  const onChange = (newValue: string[]) => {
-    setValue(newValue);
+  const [selectedOptions, setSelectedOptions] = useState<{
+    [key: string]: string[];
+  }>({});
+
+  const handleSelect = (options: { [key: string]: string[] }) => {
+    setSelectedOptions(options);
   };
 
-  const tProps = {
-    treeData,
-    value,
-    onChange,
-    treeCheckable: true,
-    showCheckedStrategy: SHOW_PARENT,
-    placeholder: 'Filter',
-    style: {
-      width: '100px',
-      height: '48px',
-    },
-  };
   return (
     <div className='bg-[#FAFAFA] p-4 w-full h-full min-h-screen '>
       <div className='m-4 bg-white rounded-md h-full p-3'>
@@ -147,13 +101,7 @@ const Courses = () => {
           </div>
 
           <div className='flex gap-2'>
-            <div>
-              <TreeSelect
-                {...tProps}
-                className='text-sm w-[100px] text-[#808084] font-light'
-                dropdownStyle={{ width: '200px' }}
-              />
-            </div>
+            <Filter options={options} onSelect={handleSelect} />
             <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[130px]'>
               <p>Export Data</p>
               <ExportIcon />
@@ -162,8 +110,17 @@ const Courses = () => {
         </div>
 
         <div className='border-y p-3 w-full flex justify-between'>
-          <div className='bg-[#FAFAFA] p-2 rounded-xl text-xs cursor-pointer'>
-            All Courses
+          <div className='flex gap-2'>
+            {Object.keys(selectedOptions).flatMap((filter) =>
+              selectedOptions[filter].map((option) => (
+                <div
+                  key={`${filter}-${option}`}
+                  className='bg-[#FAFAFA] p-2 rounded-xl text-xs cursor-pointer'
+                >
+                  {option}
+                </div>
+              ))
+            )}
           </div>
           <div>1 - 10</div>
         </div>

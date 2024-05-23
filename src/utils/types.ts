@@ -30,3 +30,8 @@ export type CourseTableDataType = {
   level: string;
   attendance: string;
 };
+
+export type FilterOptionsType = {
+  filter: string;
+  options: string[];
+};
