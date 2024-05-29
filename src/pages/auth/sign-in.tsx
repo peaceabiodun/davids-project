@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ReactComponent as HelpIcon } from '../../assets/icons/help-circle.svg';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabase';
 
 type SigninFormType = {
   email: string;
@@ -13,10 +14,24 @@ const Signin = () => {
     password: '',
   });
   const navigate = useNavigate();
+  const disabled = !formData.email || !formData.password;
 
   const login = async () => {
     setLoading(true);
-    navigate('/welcome');
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      setFormData({ email: '', password: '' });
+      navigate('/welcome');
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,8 +72,14 @@ const Signin = () => {
               setFormData({ ...formData, password: e.target.value })
             }
           />
+          {disabled && (
+            <div className='text-sm mt-2'>
+              Please input correct email and password
+            </div>
+          )}
 
           <button
+            disabled={disabled}
             type='submit'
             className='text-white bg-black p-2 rounded-lg w-full h-[64px] mt-6'
             onClick={login}

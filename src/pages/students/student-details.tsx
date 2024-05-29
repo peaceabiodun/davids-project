@@ -1,12 +1,17 @@
 import StudentProfile from '../../components/student-profile';
 import { ReactComponent as CourseIcon } from '../../assets/icons/course-icon.svg';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search-icon.svg';
-import { ReactComponent as FilterIcon } from '../../assets/icons/filter-icon.svg';
 import { ReactComponent as ExportIcon } from '../../assets/icons/export-icon.svg';
 import { Table, TableProps } from 'antd';
 import { YearTableDataType } from '../../utils/types';
+import Filter from '../../components/filter';
+import { useState } from 'react';
 
 const StudentDetails = () => {
+  const [selectedOptions, setSelectedOptions] = useState<{
+    [key: string]: string[];
+  }>({});
+
   const tabs = ['Courses', 'Attendance', 'Results'];
   const years = ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
 
@@ -64,6 +69,21 @@ const StudentDetails = () => {
       status: 'passed',
     },
   ];
+
+  const options = [
+    {
+      filter: 'Course Code',
+      options: ['COMPT 101', 'MTH 105', 'ICT 401', 'GNS 201'],
+    },
+    {
+      filter: 'Status',
+      options: ['Passed', 'Failed'],
+    },
+  ];
+
+  const handleSelect = (options: { [key: string]: string[] }) => {
+    setSelectedOptions(options);
+  };
   return (
     <div className='bg-[#FAFAFA] p-4 w-full h-full min-h-screen '>
       <StudentProfile />
@@ -101,12 +121,9 @@ const StudentDetails = () => {
             </div>
 
             <div className='flex gap-2'>
-              <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[100px] '>
-                <p>Filter</p>
-                <FilterIcon />
-              </div>
+              <Filter options={options} onSelect={handleSelect} />
 
-              <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[130px]'>
+              <div className='border rounded-lg p-2 flex items-center gap-2 justify-between text-[#808084] font-light text-sm w-[130px] cursor-pointer'>
                 <p>Export Data</p>
                 <ExportIcon />
               </div>
