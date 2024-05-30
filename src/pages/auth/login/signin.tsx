@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ReactComponent as HelpIcon } from '../../assets/icons/help-circle.svg';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
+import { ReactComponent as HelpIcon } from '../../../assets/icons/help-circle.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../../../lib/supabase';
 
 type SigninFormType = {
   email: string;
@@ -86,6 +86,13 @@ const Signin = () => {
           >
             {loading ? 'Loading...' : 'Sign In'}
           </button>
+
+          <div className='flex gap-1 text-xs mt-1'>
+            <p>If you don&apos;t have a registered account please</p>
+            <Link to={'/signup'} className='text-green-500'>
+              Register
+            </Link>
+          </div>
         </div>
       </div>
     </div>

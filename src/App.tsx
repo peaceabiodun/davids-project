@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom';
-import Signin from './pages/auth/sign-in';
+import Signin from './pages/auth/login/signin';
 import Welcome from './pages/welcome';
 import DashboardLayout from './layouts/dashboard.layout';
 import Home from './pages/home';
@@ -15,11 +15,13 @@ import StudentDetails from './pages/students/student-details';
 import Hostels from './pages/hostels';
 import Guardians from './pages/guardians';
 import Lecturers from './pages/lecturers';
+import Signup from './pages/auth/register/signup';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path='/' element={<Signin />} />
+      <Route path='/signup' element={<Signup />} />
       <Route path='/welcome' element={<Welcome />} />
       <Route path='/dashboard' element={<DashboardLayout />}>
         <Route index element={<Home />} />
