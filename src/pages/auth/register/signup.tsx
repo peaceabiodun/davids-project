@@ -17,8 +17,10 @@ const Signup = () => {
     password: '',
   });
 
+  const navigate = useNavigate();
   const createUser = () => {
     setLoading(true);
+    navigate('/register');
   };
   return (
     <div className='w-full h-screen grid grid-cols-1 md:grid-cols-2'>

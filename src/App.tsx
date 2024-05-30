@@ -16,6 +16,7 @@ import Hostels from './pages/hostels';
 import Guardians from './pages/guardians';
 import Lecturers from './pages/lecturers';
 import Signup from './pages/auth/register/signup';
+import RegisterLayout from './layouts/register.layout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<Signin />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/welcome' element={<Welcome />} />
+      <Route path='/register' element={<RegisterLayout />}></Route>
       <Route path='/dashboard' element={<DashboardLayout />}>
         <Route index element={<Home />} />
         <Route path='students' element={<Students />} />
