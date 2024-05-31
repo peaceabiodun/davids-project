@@ -44,7 +44,7 @@ const Signin = () => {
         <h3 className='text-[#8F8F8F] text-lg'>Sign in</h3>
         <h3 className='text-2xl font-medium mt-1'>Welcome Back!</h3>
 
-        <div className='  max-w-[444px] my-6'>
+        <div className='max-w-[444px] my-6'>
           <div className='flex justify-between'>
             <label className='text-sm'>Email Address</label>
             <HelpIcon />

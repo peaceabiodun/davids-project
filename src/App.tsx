@@ -17,6 +17,9 @@ import Guardians from './pages/guardians';
 import Lecturers from './pages/lecturers';
 import Signup from './pages/auth/register/signup';
 import RegisterLayout from './layouts/register.layout';
+import AcademicDetails from './pages/auth/register/academic-details';
+import HostelDetails from './pages/auth/register/hostel-details';
+import GuardianDetails from './pages/auth/register/guardian-details';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,7 +27,13 @@ const router = createBrowserRouter(
       <Route path='/' element={<Signin />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/welcome' element={<Welcome />} />
-      <Route path='/register' element={<RegisterLayout />}></Route>
+
+      <Route path='/register' element={<RegisterLayout />}>
+        <Route index element={<AcademicDetails />} />
+        <Route path='hostel-details' element={<HostelDetails />} />
+        <Route path='guardian-details' element={<GuardianDetails />} />
+      </Route>
+
       <Route path='/dashboard' element={<DashboardLayout />}>
         <Route index element={<Home />} />
         <Route path='students' element={<Students />} />

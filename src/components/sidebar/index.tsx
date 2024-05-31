@@ -43,9 +43,13 @@ const Sidebar = () => {
 
   const { pathname } = useLocation();
   const isLinkActive = (baseRoute?: string) => {
+    if (baseRoute === '' && pathname === '/dashboard') {
+      return true;
+    }
     if (baseRoute) {
       return pathname.includes(baseRoute);
     }
+    return false;
   };
   return (
     <div className='w-[280px] my-3'>
