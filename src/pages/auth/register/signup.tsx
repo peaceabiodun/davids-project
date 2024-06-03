@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ReactComponent as HelpIcon } from '../../../assets/icons/help-circle.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../../lib/supabase';
+import { STORAGE_KEYS } from '../../../utils/constants';
 
 type SignupFormType = {
   first_name: string;
@@ -33,9 +34,23 @@ const Signup = () => {
           },
         },
       });
-
-      setFormData({ first_name: '', last_name: '', email: '', password: '' });
-      navigate('/register');
+      if (data !== null) {
+        localStorage.setItem(
+          STORAGE_KEYS.AUTH_TOKEN,
+          data.session?.access_token ?? ''
+        );
+        localStorage.setItem(STORAGE_KEYS.EMAIL, data.user?.email ?? '');
+        localStorage.setItem(
+          STORAGE_KEYS.FIRST_NAME,
+          data.user?.user_metadata.first_name ?? ''
+        );
+        localStorage.setItem(
+          STORAGE_KEYS.LAST_NAME,
+          data.user?.user_metadata.last_name ?? ''
+        );
+        setFormData({ first_name: '', last_name: '', email: '', password: '' });
+        navigate('/register');
+      }
     } catch (err: any) {
       console.log(err);
     } finally {

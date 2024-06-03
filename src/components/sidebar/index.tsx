@@ -6,6 +6,7 @@ import { ReactComponent as HostelIcon } from '../../assets/icons/hostel-icon.svg
 import { ReactComponent as UserIcon } from '../../assets/icons/user-icon.svg';
 import Avatar from '../../assets/images/avatar.png';
 import { Link, useLocation } from 'react-router-dom';
+import { STORAGE_KEYS } from '../../utils/constants';
 
 const Sidebar = () => {
   const sidebarMenu = [
@@ -51,6 +52,10 @@ const Sidebar = () => {
     }
     return false;
   };
+
+  const firstName = localStorage.getItem(STORAGE_KEYS.FIRST_NAME);
+  const lastName = localStorage.getItem(STORAGE_KEYS.LAST_NAME);
+  const email = localStorage.getItem(STORAGE_KEYS.EMAIL);
   return (
     <div className='w-[280px] my-3'>
       <div className='flex justify-between border-b px-3 pb-3 h-[70px]'>
@@ -68,10 +73,10 @@ const Sidebar = () => {
       <div className='p-3 border-b flex gap-3'>
         <img src={Avatar} alt='avatar' />
         <div className='text-sm'>
-          <p>David Muritala</p>
-          <p className='text-[#999999] mt-1 font-light'>
-            david.muri@schoolportal.com
+          <p>
+            {firstName} {lastName}
           </p>
+          <p className='text-[#999999] mt-1 font-light'>{email}</p>
         </div>
       </div>
 

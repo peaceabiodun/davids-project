@@ -1,10 +1,10 @@
-import { createContext } from 'vm';
+import { createContext } from 'react';
 import { RegistrationFormType } from '../utils/types';
 import { ReactNode, useContext, useState } from 'react';
 
 type RegistrationContextType = {
   registrationFormData: RegistrationFormType;
-  setRegistrationFormData: (item: RegistrationFormType[]) => void;
+  setRegistrationFormData: (item: RegistrationFormType) => void;
 };
 
 export const RegistrationContext = createContext({} as RegistrationContextType);
@@ -35,8 +35,8 @@ export const RegistrationProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-//  const useRegistrationContext = () => {
-//   return useContext(RegistrationContext);
-// };
+const useRegistrationContext = () => {
+  return useContext(RegistrationContext);
+};
 
-// export default useRegistrationContext;
+export default useRegistrationContext;
