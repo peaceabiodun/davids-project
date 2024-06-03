@@ -16,10 +16,10 @@ import Hostels from './pages/hostels';
 import Guardians from './pages/guardians';
 import Lecturers from './pages/lecturers';
 import Signup from './pages/auth/register/signup';
-import RegisterLayout from './layouts/register.layout';
 import AcademicDetails from './pages/auth/register/academic-details';
 import HostelDetails from './pages/auth/register/hostel-details';
 import GuardianDetails from './pages/auth/register/guardian-details';
+import RegisterLayout from './layouts/register.layout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

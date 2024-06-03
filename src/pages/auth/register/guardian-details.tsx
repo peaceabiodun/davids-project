@@ -1,8 +1,26 @@
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as HelpIcon } from '../../../assets/icons/help-circle.svg';
+import useRegistrationContext from '../../../context/registration-context';
+import { useState } from 'react';
 
 const GuardianDetails = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const { registrationFormData, setRegistrationFormData } =
+    useRegistrationContext();
+
+  const register = async () => {
+    setLoading(true);
+    try {
+      navigate('/welcome', { replace: true });
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
       <h3 className='text-[#8F8F8F] text-lg'>Guardian Details</h3>
@@ -21,6 +39,16 @@ const GuardianDetails = () => {
               type='text'
               className='bg-[#FAFAFA] outline-none p-3 placeholder:text-[#B3B3B3] text-sm h-[50px] w-full rounded-xl mt-2'
               placeholder='Enter First Name'
+              value={registrationFormData?.guardian.first_name}
+              onChange={(e) =>
+                setRegistrationFormData({
+                  ...registrationFormData,
+                  guardian: {
+                    ...registrationFormData.guardian,
+                    first_name: e.target.value,
+                  },
+                })
+              }
             />
           </div>
 
@@ -32,7 +60,17 @@ const GuardianDetails = () => {
             <input
               type='text'
               className='bg-[#FAFAFA] outline-none p-3 placeholder:text-[#B3B3B3] text-sm h-[50px] w-full rounded-xl mt-2'
-              placeholder='Enter First Name'
+              placeholder='Enter last Name'
+              value={registrationFormData?.guardian.last_name}
+              onChange={(e) =>
+                setRegistrationFormData({
+                  ...registrationFormData,
+                  guardian: {
+                    ...registrationFormData.guardian,
+                    last_name: e.target.value,
+                  },
+                })
+              }
             />
           </div>
         </div>
@@ -45,6 +83,16 @@ const GuardianDetails = () => {
           type='tel'
           className='bg-[#FAFAFA] outline-none p-3 placeholder:text-[#B3B3B3] text-sm h-[50px] w-full rounded-xl mt-2'
           placeholder='Enter Phone Number'
+          value={registrationFormData?.guardian.phone_no}
+          onChange={(e) =>
+            setRegistrationFormData({
+              ...registrationFormData,
+              guardian: {
+                ...registrationFormData.guardian,
+                phone_no: e.target.value,
+              },
+            })
+          }
         />
 
         <div className='flex justify-between mt-4'>
@@ -55,13 +103,23 @@ const GuardianDetails = () => {
           type='text'
           className='bg-[#FAFAFA] outline-none p-3 placeholder:text-[#B3B3B3] text-sm h-[50px] w-full rounded-xl mt-2'
           placeholder='E.g Mother'
+          value={registrationFormData?.guardian.relationship}
+          onChange={(e) =>
+            setRegistrationFormData({
+              ...registrationFormData,
+              guardian: {
+                ...registrationFormData.guardian,
+                relationship: e.target.value,
+              },
+            })
+          }
         />
 
         <button
-          onClick={() => navigate('/welcome', { replace: true })}
+          onClick={register}
           className='text-white bg-black p-2 rounded-lg w-full h-[64px] mt-6'
         >
-          Save Details
+          {loading ? 'Loading...' : ' Save Details'}
         </button>
       </div>
     </div>
