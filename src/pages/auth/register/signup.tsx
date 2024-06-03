@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ReactComponent as HelpIcon } from '../../../assets/icons/help-circle.svg';
 import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../../../lib/supabase';
 
 type SignupFormType = {
   first_name: string;
@@ -18,10 +19,35 @@ const Signup = () => {
   });
 
   const navigate = useNavigate();
-  const createUser = () => {
+  const createUser = async () => {
     setLoading(true);
-    navigate('/register');
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            first_name: formData.first_name,
+            last_name: formData.last_name,
+          },
+        },
+      });
+
+      setFormData({ first_name: '', last_name: '', email: '', password: '' });
+      navigate('/register');
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const disable =
+    !formData.first_name ||
+    !formData.last_name ||
+    !formData.email ||
+    !formData.password;
   return (
     <div className='w-full h-screen grid grid-cols-1 md:grid-cols-2'>
       <div className='bg-[#FBFBFB] text-[#EEEEEE] p-6 hidden md:flex flex-col justify-center'>
@@ -96,8 +122,11 @@ const Signup = () => {
 
           <button
             type='submit'
+            disabled={disable}
             onClick={createUser}
-            className='text-white bg-black p-2 rounded-lg w-full h-[64px] mt-6'
+            className={` text-white bg-black p-2 rounded-lg w-full h-[64px] mt-6 ${
+              disable ? 'cursor-not-allowed' : ''
+            }`}
           >
             {loading ? 'Loading...' : 'Sign Up'}
           </button>
