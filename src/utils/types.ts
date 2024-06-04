@@ -50,3 +50,21 @@ export type RegistrationFormType = {
     relationship: string;
   };
 };
+
+export type StudentDetailsType = {
+  id: number;
+  created_at: string;
+  matric_no: string;
+  department: string;
+  course: string;
+  level: string;
+  hostel_wing: string;
+  room_no: string;
+  guardian: {
+    first_name: string;
+    last_name: string;
+    phone_no: string;
+    relationship: string;
+  };
+  user_id: string;
+};

@@ -45,6 +45,7 @@ const Signup = () => {
           data.session?.access_token ?? ''
         );
         localStorage.setItem(STORAGE_KEYS.EMAIL, data.user?.email ?? '');
+        localStorage.setItem(STORAGE_KEYS.USER_ID, data.user?.id ?? '');
         localStorage.setItem(
           STORAGE_KEYS.FIRST_NAME,
           data.user?.user_metadata.first_name ?? ''
@@ -57,7 +58,9 @@ const Signup = () => {
         navigate('/register');
       }
     } catch (err: any) {
-      console.log(err);
+      toast.error('Sorry an error occured !', {
+        position: 'top-right',
+      });
     } finally {
       setLoading(false);
     }

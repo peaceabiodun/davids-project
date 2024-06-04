@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import Signin from './pages/auth/login/signin';
 import Welcome from './pages/welcome';
-import DashboardLayout from './layouts/dashboard.layout';
 import Home from './pages/home';
 import Students from './pages/students';
 import Courses from './pages/courses';
@@ -21,6 +20,7 @@ import HostelDetails from './pages/auth/register/hostel-details';
 import GuardianDetails from './pages/auth/register/guardian-details';
 import RegisterLayout from './layouts/register.layout';
 import RegistrationDone from './pages/welcome/registration-done';
+import DashboardLayout from './layouts/dashboard.layout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
