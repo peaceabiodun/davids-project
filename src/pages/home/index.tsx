@@ -78,17 +78,17 @@ const Home = () => {
     },
     {
       icon: <UserIcon />,
-      stat: '85,540',
+      stat: '55',
       name: 'Total Guardians',
     },
     {
       icon: <HostelIcon />,
-      stat: '85,540',
+      stat: '700',
       name: 'Total Rooms Available',
     },
     {
       icon: <UserIcon />,
-      stat: '85,540',
+      stat: '85',
       name: 'Total Lecturers',
     },
   ];

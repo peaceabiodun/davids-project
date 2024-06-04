@@ -20,6 +20,7 @@ import AcademicDetails from './pages/auth/register/academic-details';
 import HostelDetails from './pages/auth/register/hostel-details';
 import GuardianDetails from './pages/auth/register/guardian-details';
 import RegisterLayout from './layouts/register.layout';
+import RegistrationDone from './pages/welcome/registration-done';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<Signin />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/welcome' element={<Welcome />} />
+      <Route path='/registered' element={<RegistrationDone />} />
 
       <Route path='/register' element={<RegisterLayout />}>
         <Route index element={<AcademicDetails />} />

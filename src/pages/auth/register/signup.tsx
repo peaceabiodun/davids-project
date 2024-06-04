@@ -3,6 +3,7 @@ import { ReactComponent as HelpIcon } from '../../../assets/icons/help-circle.sv
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../../lib/supabase';
 import { STORAGE_KEYS } from '../../../utils/constants';
+import { toast } from 'react-toastify';
 
 type SignupFormType = {
   first_name: string;
@@ -34,7 +35,11 @@ const Signup = () => {
           },
         },
       });
-      if (data !== null) {
+      if (error) {
+        toast.error('Sorry an error occured !', {
+          position: 'top-right',
+        });
+      } else {
         localStorage.setItem(
           STORAGE_KEYS.AUTH_TOKEN,
           data.session?.access_token ?? ''
